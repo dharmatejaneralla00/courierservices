@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    $(function()
+    {
+    $("#getdate").datepicker(
+    {
+    changeMonth:true,
+    changeYear:true
+    }).datepicker("setDate","0");
+    });
+</script>
+<style>
+    form
+    {
+    text-align:center;
+    padding : 5% 30%;
+    font-size:15px;
+    display:inline-block;
+    margin:20px 0;
+
+    }
+        input[type=text],input[type=date]
+        {
+        width:auto;
+        padding : 2px;
+        margin : 10px 0;
+        display : inline-block;
+        border:1px solid black;
+        box-sizing : border-box;
+        
+        }
+        a,input[type=submit]
+        {
+        background-color : rgb(95, 95, 95);
+        color : white;
+        padding: 10px ;
+        text-decoration: none;
+        border :black;
+        cursor : pointer;
+        width :auto;
+        }
+        input[type=submit]:hover
+        {
+        background-color: black;}
+
+
+    </style>
+<body>
+<form method="post" action="">
+    {% csrf_token %}
+    Recieved Date<input name="date" type="text" id="getdate"><br><br><br>
+    Consignment Number<input name="addcon" required type="text" maxlength="15" autofocus >
+    Recieved By <input type="text" name="recby">
+    <input name="add" type="submit" value="Add">
+    <a href="/">Back</a><br><br>
+<div style="font: message-box; font-size: medium;" >
+{% for mes in messages %}
+{{mes}}
+{% endfor %}
+</div>
+</form>
+</body>
+</html>

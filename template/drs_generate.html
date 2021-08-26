@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>generate drs</title>
+</head>
+<style>
+    form,a
+    {
+    text-align:center;
+    padding : 5% 30%;
+    font-size:15px;
+    display:inline-block;
+    margin:20px 0;
+
+    }
+        input[type=text],input[type=date]
+        {
+        width:auto;
+        padding : 2px;
+        margin : 10px 0;
+        display : inline-block;
+        border:1px solid black;
+        box-sizing : border-box;
+        
+        }
+        a,input[type=submit]
+        {
+        background-color : rgb(95, 95, 95);
+        color : white;
+        padding: 10px ;
+        text-decoration: none;
+        border :black;
+        cursor : pointer;
+        width :auto;
+        }
+        input[type=submit]:hover
+        {
+        background-color: black;}
+
+
+    </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    $(function()
+    {
+    $("#getdate").datepicker(
+    {
+    changeMonth:true,
+    changeYear:true
+    }).datepicker("setDate","0");
+    });
+</script>
+<body>
+<form action="" method="post" id="delboyform">
+    {% csrf_token %}
+    Date:<input name="date" type="text" id="getdate"><br>
+    <select id="delboy" name="areaname" form="delboyform" >
+        {% for area in areas %}
+        <option value={{area.areaname}}>{{area.areaname}}</option>
+        {% endfor %}
+    </select><br>
+<select id="delboy" name="delboyselect" form="delboyform" >
+    {% for boy in boys %}
+    <option value={{boy.boyname}}>{{boy.boyname}}</option>
+    {% if boy.boyname == boylast %}
+    <option value={{boy.boyname}} selected>{{boy.boyname}}</option>
+    {% endif %}
+    {% endfor %}
+</select><br>
+    Drs Number <input name="drsno" type="text"  ><br>
+    Consignment Number<input name="conno" type="text"><br>
+    <input type="submit" name="adddrs" value="Add" >
+<a href="/">Back</a><br>
+</form>
+{% for mes in messages %}
+    {{mes}}
+{%  endfor %}
+{% for drs in drsdb %}
+{% if drs.drsno == con %}
+{{drs.date}}&nbsp; {{drs.drsno}} &nbsp; {{drs.conno}} &nbsp;{{drs.boy}}
+&nbsp;{{drs.area}} &nbsp; {{drs.pcs}} &nbsp;{{drs.wth}}<br>
+{% endif %}
+{% endfor %}
+</body>
+</html>

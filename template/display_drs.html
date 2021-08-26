@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display_drs</title>
+</head>
+<body>
+<form action="" name="drssearch" method="POST">
+    {% csrf_token %}
+    Drs No<input type="text" name="drsnosearch">
+    <input type="submit" name="Search" value="Search">
+</form>
+{% for dr in drs %}
+{% if dr.drsno == drsnosearch %}
+{{dr.date}}&nbsp;{{dr.drsno}} &nbsp;{{dr.conno}} &nbsp; {{dr.pcs}} &nbsp;{{dr.wth}}&nbsp;{{dr.boy}}&nbsp;{{dr.boy}}<br>
+{% endif %}
+{% endfor %}
+</body>
+</html>

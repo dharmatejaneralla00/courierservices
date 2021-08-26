@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display</title>
+</head>
+<style>
+    form
+    {
+    text-align:center;
+    padding : 5% 30%;
+    font-size:15px;
+    display:inline-block;
+    margin=20px 0;
+
+    }
+        input[type=text],input[type=date]
+        {
+        width:auto;
+        padding : 2px;
+        margin : 10px 0;
+        display : inline-block;
+        border:1px solid black;
+        box-sizing : border-box;
+        }
+        a,input[type=submit]
+        {
+        background-color : rgb(88, 88, 92);
+        color : white;
+        padding: 10px ;
+        text-decoration: none;
+        border :black;
+        cursor : pointer;
+        width :auto;
+
+        }
+        input[type=submit]:hover
+        {opacity:0.5;}
+
+
+    </style>
+<body>
+<form action="" method="post">
+    {% csrf_token %}
+    Manifest number <input name="msfnum" type="text" autofocus>
+    <br>
+    <input name="disp" value="Display" type="submit">
+    <a href="index" >Back</a><br>
+   <h3><table> Manifest Number      Recieved Date &nbsp;   Consignment Number  &nbsp;  Pcs &nbsp;   Wt </table></h3>
+    {% for disp in dsp %}
+    {% if  msfno == disp.mfno %}
+    <div><h3>
+       <br> {{disp.mfno}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {{disp.date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {{disp.conno}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {{disp.pcs}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {{disp.wt}}
+        </h3>
+    </div>
+    {% endif %}
+    {% endfor %}
+</form>
+</body>
+</html>

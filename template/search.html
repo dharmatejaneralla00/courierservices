@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<style>
+    form
+    {
+    text-align:center;
+    padding : 5% 30%;
+    font-size:15px;
+    display:inline-block;
+    margin :20px 0;
+
+    }
+        input[type=text],input[type=date]
+        {
+        width:auto;
+        padding : 2px;
+        margin : 10px 0;
+        display : inline-block;
+        border:1px solid black;
+        box-sizing : border-box;
+        }
+        a,input[type=submit]
+        {
+        background-color : rgb(88, 88, 92);
+        color : white;
+        padding: 10px ;
+        text-decoration: none;
+        border :black;
+        cursor : pointer;
+        width :auto;
+
+        }
+        input[type=submit]:hover
+        {opacity:0.5;}
+
+
+</style>
+<body>
+    
+<form action="" method="post">
+    {% csrf_token %}
+    Consignment number <input type="text" autofocus name="Searchno" >
+    <input name="search" type="submit" value="Search">
+    <a href="index" name="back" >Back</a><br><br>
+    {% for src in srch %}
+    {% if src.conno == mfno %}
+   Manifest Number<input type="text" disabled value="{{src.mfno}}"style="color: red;"><br>
+   Recieved Date&nbsp;&nbsp;&nbsp;<input type="text" disabled value=" {{src.date}}"style="color: red;"><br>
+    Consignment No<input type="text" disabled value=" {{src.conno}}"style="color: red;"><br>
+    Pcs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="text" disabled value=" {{src.pcs}}"style="color: red;"><br>
+    Wt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="text" disabled value=" {{src.wt}}"style="color: red;"><br>
+    {% endif %}
+   
+    {% endfor %}
+    
+    {% for dels in del %}
+    {% if mfno == dels.consignmentnumber  %}
+    Recieved By <input type="text" name="recby" value="{{del.recievedby}}"><br>
+    Delivery Date <input type="text" name="deldate" value="{{delivereddate}}">
+    {% endif %}
+    {% endfor %}
+</form>
+</body>
+</html>

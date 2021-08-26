@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<style>
+    form
+    {
+    text-align:center;
+    padding : 5% 30%;
+    font-size:15px;
+    display:inline-block;
+    margin :20px 0;
+
+    }
+        input[type=text],input[type=date]
+        {
+        width:auto;
+        padding : 2px;
+        margin : 10px 0;
+        display : inline-block;
+        border:1px solid black;
+        box-sizing : border-box;
+        }
+        a,input[type=submit]
+        {
+        background-color : rgb(88, 88, 92);
+        color : white;
+        padding: 10px ;
+        text-decoration: none;
+        border :black;
+        cursor : pointer;
+        width :auto;
+
+        }
+        input[type=submit]:hover
+        {opacity:0.5;}
+
+
+</style>
+<body>
+    
+<form action="" method="post">
+    {% csrf_token %}
+    Consignment number <input type="text" autofocus name="conno" >
+    <input name="search" type="submit" value="Search">
+    <a href="/" name="back" >Back</a><br><br>
+    {% for rec in recs %}
+    {% if rec.consignmentnumber == con %}
+    Consignment Number<input type="text" value=" {{rec.consignmentnumber}}"style="color: red;"><br>
+    Delivered Date <input type="text"  value="{{rec.delivereddate}}"><br>
+    Recieved By <input type="text" value="{{rec.recievedby}}"><br>
+    </div>
+    
+    
+    {% endif %}
+   
+    {% endfor %}
+    
+</form>
+</body>
+</html>
